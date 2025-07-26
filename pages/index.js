@@ -43,7 +43,7 @@ export default function Home() {
           <div className="container" align='center'> 
              <h1 className="display-4">Welcome to SwiftShip</h1>
             <p className="lead">Reliable, Fast & Secure Shipping Solutions</p>
-            <a href="#quote" className="btn btn-primary mt-3">Book Now</a>
+            <a href="/book" className="btn btn-primary mt-3">Book Now</a>
           </div>
         </section>
 

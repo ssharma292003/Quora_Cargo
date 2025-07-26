@@ -3,34 +3,52 @@ import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Container, Table, Button, Alert } from 'react-bootstrap';
+import { getToken, getRole } from '../utils/auth';
 
 export default function Admin() {
   const [requests, setRequests] = useState([]);
-  const [message, setMessage] = useState('');
+  const [msg, setMsg] = useState('');
 
-  const fetchRequests = async () => {
+  const fetchReq = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/booking-requests');
+      const res = await axios.get('http://localhost:5000/api/booking-requests', {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      });
       setRequests(res.data);
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleApprove = async id => {
-    await axios.patch(`http://localhost:5000/api/booking-requests/${id}/status`);
-    setMessage(`Request ${id} approved`);
-    fetchRequests();
+  const approve = async id => {
+    try {
+      await axios.patch(
+        `http://localhost:5000/api/booking-requests/${id}/status`,
+        {},
+        { headers: { Authorization: `Bearer ${getToken()}` } }
+      );
+      setMsg(`Booking ${id} approved`);
+      fetchReq();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  useEffect(() => { fetchRequests(); }, []);
+  useEffect(() => {
+    if (getRole() !== 'admin') window.location.href = '/login';
+    else fetchReq();
+  }, []);
 
   return (
     <>
       <Header />
       <Container className="py-5">
         <h2>Booking Requests</h2>
-        {message && <Alert variant="success">{message}</Alert>}
+        {msg && <Alert variant="success">{msg}</Alert>}
         <Table>
-          <thead><tr><th>ID</th><th>Shipment</th><th>Approved</th><th>Action</th></tr></thead>
+          <thead>
+            <tr><th>ID</th><th>Shipment ID</th><th>Approved?</th><th>Action</th></tr>
+          </thead>
           <tbody>
             {requests.map(r => (
               <tr key={r.id}>
@@ -39,7 +57,7 @@ export default function Admin() {
                 <td>{r.approved ? 'Yes' : 'No'}</td>
                 <td>
                   {!r.approved && (
-                    <Button onClick={() => handleApprove(r.id)}>Approve</Button>
+                    <Button onClick={() => approve(r.id)}>Approve</Button>
                   )}
                 </td>
               </tr>

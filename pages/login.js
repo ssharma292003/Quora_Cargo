@@ -5,19 +5,30 @@ import Footer from '../components/Footer';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 export default function Login() {
-  const [form, setForm] = useState({ username: '', password: '' });
+  const [form, setForm] = useState({
+    username: '',
+    password: '',
+    role: 'admin',
+    remember: false,
+  });
   const [error, setError] = useState('');
-  const [user, setUser] = useState(null);
 
-  const handleChange = e =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      setUser(res.data.user);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('role', res.data.user.role);
+      window.location.href = res.data.user.role === 'admin' ? '/admin' : '/track';
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     }
@@ -29,17 +40,53 @@ export default function Login() {
       <Container className="py-5" style={{ maxWidth: '500px' }}>
         <h2>Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}
-        {user && <Alert variant="success">Welcome {user.username} (Role: {user.role})</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
-            <Form.Control name="username" onChange={handleChange} required />
+            <Form.Label>Role</Form.Label>
+            <Form.Select name="role" value={form.role} onChange={handleChange} required>
+              <option value="">Select your role</option>
+              <option value="admin">Admin</option>
+              <option value="franchise">Franchise</option>
+              <option value="user">User</option>
+            </Form.Select>
           </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Username or Email</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="Enter your username or email"
+              required
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
-            <Form.Control name="password" type="password" onChange={handleChange} required />
+            <Form.Control
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              required
+            />
           </Form.Group>
-          <Button type="submit">Login</Button>
+
+          <Form.Group className="mb-3 d-flex justify-content-between align-items-center">
+            <Form.Check
+              type="checkbox"
+              name="remember"
+              label="Remember me"
+              checked={form.remember}
+              onChange={handleChange}
+            />
+            <a href="#" className="text-decoration-none small text-primary">Forgot password?</a>
+          </Form.Group>
+
+          <Button type="submit" className="w-100">Log In</Button>
         </Form>
       </Container>
       <Footer />
