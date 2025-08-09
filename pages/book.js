@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getCurrentUser } from '../utils/auth'; // ✅ session-based check
 
 export default function BookShipment() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,18 @@ export default function BookShipment() {
 
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+
+  // ✅ Check session on page load
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      if (!user) {
+        window.location.href = '/login'; // 🔒 redirect if not logged in
+      } else {
+        setUser(user);
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +39,10 @@ export default function BookShipment() {
     setMessage('');
 
     try {
-      const res = await axios.post('http://localhost:3000/api/booking/book', formData);
+      const res = await axios.post('http://localhost:5000/api/bookings', formData, {
+        withCredentials: true, // ✅ include session cookie
+      });
+
       setMessage(`✅ Booking successful! Tracking Number: ${res.data.tracking_number}`);
       setFormData({
         sender_name: '',
@@ -42,6 +58,8 @@ export default function BookShipment() {
 
     setLoading(false);
   };
+
+  if (!user) return null; // prevent rendering until session checked
 
   return (
     <>
@@ -76,6 +94,7 @@ export default function BookShipment() {
           `}
         </style>
       </Head>
+
       <Header />
 
       <div className="container mt-5 mb-5">

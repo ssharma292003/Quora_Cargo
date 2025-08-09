@@ -25,10 +25,19 @@ export default function Login() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('role', res.data.user.role);
-      window.location.href = res.data.user.role === 'admin' ? '/admin' : '/track';
+      const res = await axios.post('http://localhost:5000/api/auth/login', form, {
+        withCredentials: true, // ✅ Include session cookies
+      });
+
+      const userRole = res.data.user.role;
+      if (userRole === 'admin') {
+        window.location.href = '/admin';
+      } else if (userRole === 'franchise') {
+        window.location.href = '/franchise'; // update if route is different
+      } else {
+        window.location.href = '/';
+      }
+
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     }

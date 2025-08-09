@@ -1,7 +1,34 @@
-
+'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { getCurrentUser } from '../utils/auth'; // Make sure this path is correct
+import axios from 'axios';
 
 export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function checkAuth() {
+      const user = await getCurrentUser();
+      setIsLoggedIn(!!user);
+    }
+    checkAuth();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:5000/api/auth/logout', {}, {
+        withCredentials: true,
+      });
+      setIsLoggedIn(false);
+      router.push('/login');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
       <div className="container">
@@ -18,8 +45,14 @@ export default function Header() {
             <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
           </ul>
           <div className="d-flex gap-2">
-            <Link href="/login" className="btn btn-outline-primary">Login</Link>
-            <Link href="/register" className="btn btn-primary">Sign Up</Link>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+            ) : (
+              <>
+                <Link href="/login" className="btn btn-outline-primary">Login</Link>
+                <Link href="/register" className="btn btn-primary">Sign Up</Link>
+              </>
+            )}
           </div>
         </div>
       </div>
