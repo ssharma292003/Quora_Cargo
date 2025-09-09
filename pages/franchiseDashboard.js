@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import FranchiseHeader from '../components/franchiseHeader';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import FranchiseHeader from "../components/franchiseHeader";
+import axios from "axios";
 
 export default function FranchiseDashboard() {
   const [shipments, setShipments] = useState([]);
-  const franchiseId = localStorage.getItem('franchiseId'); // Ensure it's stored at login
+  const [franchiseId, setFranchiseId] = useState(null);
+
+  useEffect(() => {
+    // Run only in browser
+    if (typeof window !== "undefined") {
+      const storedId = localStorage.getItem("franchiseId");
+      setFranchiseId(storedId);
+    }
+  }, []);
 
   useEffect(() => {
     if (franchiseId) {
-      axios.get(`http://localhost:5000/api/shipments/franchise/${franchiseId}`)
+      axios
+        .get(`http://localhost:5000/api/shipments/franchise/${franchiseId}`)
         .then((res) => setShipments(res.data))
-        .catch((err) => console.error('Failed to fetch shipments:', err));
+        .catch((err) => console.error("Failed to fetch shipments:", err));
     }
   }, [franchiseId]);
 
