@@ -278,72 +278,7 @@ export default function Home() {
 
         <hr className="soft-divider" />
         
-        {/* Pricing Section */}
-        <section id="pricing" className="container-xxl py-5">
-          <div className="container py-5">
-            <div className="text-center" data-aos="fadeInUp">
-              <h6 className="text-secondary text-uppercase">Pricing Plan</h6>
-              <h1 className="mb-5">Perfect Pricing Plan</h1>
-            </div>
-            <div className="row g-4 justify-content-center">
-              <div className="col-md-6 col-lg-3" data-aos="fadeInUp" data-aos-delay="300">
-                <div className="price-item">
-                  <div className="border-bottom p-4 mb-4">
-                    <h5 style={{color: 'var(--primary)'}} className="mb-1">Basic Plan</h5>
-                    <h1 className="display-5 mb-0">
-                      <small className="align-top" style={{ fontSize: '22px', lineHeight: '45px' }}>₹</small>2,999<small className="align-bottom" style={{ fontSize: '16px', lineHeight: '40px' }}>/ Month</small>
-                    </h1>
-                  </div>
-                  <div className="p-4 pt-0">
-                    <p><i className="fa fa-check text-success me-3"></i>Basic Tracking</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Email Support</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Standard Delivery</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Basic Insurance</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Monthly Reports</p>
-                    <a className="btn-slide mt-2" href="#"><i className="fa fa-arrow-right"></i><span>Order Now</span></a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3" data-aos="fadeInUp" data-aos-delay="500">
-                <div className="price-item">
-                  <div className="border-bottom p-4 mb-4">
-                    <h5 style={{color: 'var(--primary)'}} className="mb-1">Standard Plan</h5>
-                    <h1 className="display-5 mb-0">
-                      <small className="align-top" style={{ fontSize: '22px', lineHeight: '45px' }}>₹</small>5,999<small className="align-bottom" style={{ fontSize: '16px', lineHeight: '40px' }}>/ Month</small>
-                    </h1>
-                  </div>
-                  <div className="p-4 pt-0">
-                    <p><i className="fa fa-check text-success me-3"></i>Advanced Tracking</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Priority Support</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Express Delivery</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Full Insurance</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Weekly Reports</p>
-                    <a className="btn-slide mt-2" href="#"><i className="fa fa-arrow-right"></i><span>Order Now</span></a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3" data-aos="fadeInUp" data-aos-delay="700">
-                <div className="price-item">
-                  <div className="border-bottom p-4 mb-4">
-                    <h5 style={{color: 'var(--primary)'}} className="mb-1">Advanced Plan</h5>
-                    <h1 className="display-5 mb-0">
-                      <small className="align-top" style={{ fontSize: '22px', lineHeight: '45px' }}>₹</small>9,999<small className="align-bottom" style={{ fontSize: '16px', lineHeight: '40px' }}>/ Month</small>
-                    </h1>
-                  </div>
-                  <div className="p-4 pt-0">
-                    <p><i className="fa fa-check text-success me-3"></i>Real-time Tracking</p>
-                    <p><i className="fa fa-check text-success me-3"></i>24/7 Support</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Same Day Delivery</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Premium Insurance</p>
-                    <p><i className="fa fa-check text-success me-3"></i>Daily Reports</p>
-                    <a className="btn-slide mt-2" href="#"><i className="fa fa-arrow-right"></i><span>Order Now</span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+       
         <hr className="soft-divider" />
 
         {/* Get Instant Quote */}
