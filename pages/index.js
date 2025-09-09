@@ -290,16 +290,9 @@ export default function Home() {
                   <div><h5>24/7 Support</h5><p className="text-muted">Round-the-clock assistance for clients.</p></div>
                 </div>
               </div>
-              <div className="relative w-full h-[400px]">
-              <Image
-                src="/image/img1.png"
-                alt="Quora Cargo"
-                fill
-                className="object-cover rounded-4 shadow"
-                priority
-              />
-            </div>
-
+              <div className="col-lg-6" data-aos="fade-left">
+                <img className="img-fluid rounded-4 shadow" src="/image/img1.png" alt="Quora Cargo" />
+              </div>
             </div>
           </div>
         </section>
@@ -393,42 +386,35 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
+        {/* Pricing */}
+   {/* Pricing */}
+
+
+
+        <hr className="soft-divider" />
+
         {/* Team */}
-          <section className="py-5" id="team">
-            <div className="container text-center">
-              <h2 className="section-title display-4">Leadership Team</h2>
-              <p className="section-subtitle">Meet the professionals driving Quora Cargo</p>
-              <div className="row g-4">
-                {[
-                  { img: '/image/team-1.jpg', name: 'Priyeshbhai Chudasama', role: 'Founder' },
-                  { img: '/image/team-2.jpg', name: 'Sudhansu Kumar Sahoo', role: 'Co-Founder / Director' },
-                  { img: '/image/team-3.jpg', name: 'Abhijeet Singh', role: 'Chief Business Officer' }
-                ].map((member, idx) => (
-                  <div key={idx} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={idx * 100}>
-                    <div className="service-card text-center">
-                      <div
-                        className="mx-auto rounded-circle overflow-hidden mb-3"
-                        style={{ width: 120, height: 120 }}
-                      >
-                        <Image
-                          src={member.img} // Use public path directly
-                          alt={member.name}
-                          width={120}
-                          height={120}
-                          className="object-cover"
-                        />
-                      </div>
-                      <h5 className="fw-bold">{member.name}</h5>
-                      <p className="text-muted">{member.role}</p>
-                    </div>
+        <section className="py-5" id="team">
+          <div className="container text-center">
+            <h2 className="section-title display-4">Leadership Team</h2>
+            <p className="section-subtitle">Meet the professionals driving Quora Cargo</p>
+            <div className="row g-4">
+              {[
+                { img: 'image/team1.jpg', name: 'Priyeshbhai Chudasama', role: 'Founder' },
+                { img: 'image/team2.jpg', name: 'Sudhansu Kumar Sahoo', role: 'Co-Founder / Director' },
+                { img: 'image/team3.jpg', name: 'Abhijeet Singh', role: 'Chief Business Officer' }
+              ].map((member, idx) => (
+                <div key={idx} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={idx * 100}>
+                  <div className="service-card text-center">
+                    <img className="img-fluid rounded-circle mb-3" src={member.img} alt={member.name} style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
+                    <h5 className="fw-bold">{member.name}</h5>
+                    <p className="text-muted">{member.role}</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          </section>
-
-
+          </div>
+        </section>
 
         <hr className="soft-divider" />
 
