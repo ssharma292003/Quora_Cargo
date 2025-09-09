@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getCurrentUser } from '../utils/auth';
 import axios from 'axios';
-import '../styles/Header.css';
+// import '../styles/Header.css';
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

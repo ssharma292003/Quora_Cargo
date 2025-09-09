@@ -2,11 +2,12 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import '../styles/Home.css';
+// import '../styles/Home.css';
 
 export default function Home() {
   const [trackingId, setTrackingId] = useState('');
@@ -290,7 +291,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="col-lg-6" data-aos="fade-left">
-                <img className="img-fluid rounded-4 shadow" src="/image/img1.png" alt="Quora Cargo" />
+                <Image className="img-fluid rounded-4 shadow" src="/image/img1.png" alt="Quora Cargo" />
               </div>
             </div>
           </div>
@@ -488,7 +489,7 @@ export default function Home() {
               ].map((member, idx) => (
                 <div key={idx} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={idx * 100}>
                   <div className="service-card text-center">
-                    <img className="img-fluid rounded-circle mb-3" src={member.img} alt={member.name} style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
+                    <Image className="img-fluid rounded-circle mb-3" src={member.img} alt={member.name} style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
                     <h5 className="fw-bold">{member.name}</h5>
                     <p className="text-muted">{member.role}</p>
                   </div>
