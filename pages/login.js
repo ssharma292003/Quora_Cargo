@@ -33,7 +33,7 @@ export default function Login() {
       if (userRole === 'admin') {
         window.location.href = '/admin';
       } else if (userRole === 'franchise') {
-        window.location.href = '/franchise'; // update if route is different
+        window.location.href = '/franchiseDashboard'; // update if route is different
       } else {
         window.location.href = '/';
       }
