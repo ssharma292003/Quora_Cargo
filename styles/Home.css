@@ -49,6 +49,90 @@ body { background: var(--light); font-family: 'Inter', sans-serif; margin: 0; }
   border-radius: 5px; margin: 3rem auto; opacity: 0.6;
 }
 
+/* =================================== */
+/* === CREATIVE TRUCK ANIMATION ====== */
+/* =================================== */
+
+/* The main container for the tracking section acts as our "stage" */
+#track .container {
+  position: relative;
+  overflow: hidden; /* Hides the truck when it's off-screen */
+}
+
+/* The big animated truck icon */
+.animated-delivery-truck {
+  position: absolute;
+  margin-top: 27px;
+  font-size: 2.5rem; /* Big icon! */
+  color: var(--primary);
+  top: 100px; /* Position it above the form */
+  z-index: 10;
+  
+  /* Start off-screen to the left */
+  left: -150px;
+  opacity: 0;
+  
+  /* UPDATED: Added a 2s delay before the animation starts */
+  animation: truck-delivery 12s ease-in-out 2s infinite;
+}
+
+/* The form container, which will also be animated */
+.track-form-container {
+  position: relative;
+  z-index: 5;
+  
+  /* Start invisible and slightly raised */
+  opacity: 0;
+  transform: translateY(-20px);
+  
+  /* UPDATED: Added a 2s delay to sync with the truck */
+  animation: drop-in 12s ease-in-out 2s infinite;
+}
+
+/* --- NEW RULE --- */
+/* Remove the focus glow effect specifically for the tracking input */
+#track .form-control:focus {
+  border-color: #e5e7eb; /* Use the default border color */
+  box-shadow: none;       /* Remove the glow */
+  outline: none;
+}
+
+
+/* Keyframes for the truck's journey */
+@keyframes truck-delivery {
+  /* 1. Drive in from the left (0% to 20%) */
+  0% { left: -100px; opacity: 0; }
+  20% { left: 50%; transform: translateX(-50%); opacity: 1; }
+
+  /* 2. Pause in the middle (20% to 70%) */
+  70% { left: 30%; transform: translateX(-50%); opacity: 1; }
+
+  /* 3. Drive off to the right (70% to 90%) */
+  90% { left: calc(100% + 150px); opacity: 0; }
+  
+  /* 4. Stay off-screen until the loop repeats */
+  100% { left: calc(100% + 150px); opacity: 0; }
+}
+
+/* Keyframes for the form "dropping" into place */
+@keyframes drop-in {
+  /* 1. Stay hidden while truck drives in (0% to 15%) */
+  0% { opacity: 0; transform: translateY(-20px); }
+  15% { opacity: 0; transform: translateY(-20px); }
+
+  /* 2. "Drop" into view as truck arrives (15% to 25%) */
+  25% { opacity: 1; transform: translateY(0); }
+
+  /* 3. Stay visible while truck is paused (25% to 75%) */
+  75% { opacity: 1; transform: translateY(0); }
+
+  /* 4. Hide again as truck leaves (75% to 85%) */
+  85% { opacity: 0; transform: translateY(-20px); }
+
+  /* 5. Stay hidden until the loop repeats */
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
 /* HERO SECTION */
 .hero-section {
   position: relative;
@@ -149,10 +233,28 @@ section.bg-white .d-flex h5 {
   margin-bottom: 0.25rem;
 }
 
-/* CONTACT */
-.contact-section { padding: 5rem 1rem; background: #fff; }
+/* ===================== */
+/* CONTACT CSS START     */
+/* ===================== */
+.contact-section { 
+  padding: 5rem 1rem; 
+  background: #fff; 
+}
+
+/* Ensures both contact cards have same height */
+.contact-section .row.align-items-stretch { align-items: stretch; }
+.contact-card, .contact-info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Contact Form Card */
 .contact-card {
-  background: #fff; border-radius: 15px; padding: 2.5rem;
+  background: #fff;
+  border-radius: 15px;
+  padding: 2.5rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 .contact-card .form-group { position: relative; }
@@ -169,39 +271,356 @@ section.bg-white .d-flex h5 {
   border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255,107,53,0.15); outline: none;
 }
 
-/* Contact Info */
+/* Contact Info Card */
 .contact-info-card {
   background: linear-gradient(135deg,var(--primary),var(--secondary));
   border-radius: 15px; color: #fff; padding: 2.5rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
+
+/* Contact Info Items */
 .contact-info-card h4 { color: #fff; }
-.contact-item { display: flex; align-items: center; margin-bottom: 1.5rem; }
+.contact-item { 
+  display: flex; 
+  align-items: flex-start; /* Top-align icons and text */
+  margin-bottom: 1.5rem; 
+  gap: 15px; 
+}
+
+.contact-item > div { 
+  min-width: 0;   
+}
 
 .icon-box {
-  width: 55px;
-  height: 55px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   color: var(--primary);
-  margin-right: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.icon-box i { font-size: 1.3rem; }
+.icon-box i { font-size: 1.1rem; }
 
 .contact-item h6 { margin: 0; font-weight: 600; color: #fff; }
 .contact-item p { margin: 0; font-size: 0.95rem; opacity: 0.9; color: #f3f4f6; }
 
+/* ===================== */
+/* CONTACT CSS END       */
+/* ===================== */
+/* MODERN 3D FOOTER */
+.modern-footer {
+  position: relative;
+  background: linear-gradient(135deg, #0D1117 0%, #1A1A2E 50%, #16213E 100%);
+  color: #fff;
+  overflow: hidden;
+  margin-top: 6rem;
+}
+
+.modern-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0D6EFD, transparent);
+}
+
+.footer-main {
+  padding: 4rem 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-widget {
+  position: relative;
+}
+
+.footer-logo {
+  transform: perspective(1000px) rotateX(0deg);
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: perspective(1000px) rotateX(5deg);
+}
+
+.footer-logo .logo-icon {
+  font-size: 2rem;
+  color: #0D6EFD;
+  filter: drop-shadow(0 0 10px rgba(13, 110, 253, 0.3));
+}
+
+.footer-logo .logo-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.footer-description {
+  color: #B0B3B8;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.footer-title {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, #0D6EFD, #FFC107);
+  border-radius: 2px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: #B0B3B8;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 0;
+}
+
+.footer-links a::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 1px;
+  background: #0D6EFD;
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #0D6EFD;
+  padding-left: 15px;
+}
+
+.footer-links a:hover::before {
+  width: 10px;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B0B3B8;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link:hover {
+  background: #0D6EFD;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+}
+
+.footer-main .contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-main .contact-item:hover {
+  background: rgba(13, 110, 253, 0.1);
+  transform: translateX(5px);
+}
+
+.footer-main .contact-item i {
+  font-size: 1.2rem;
+  color: #0D6EFD;
+  margin-right: 1rem;
+  margin-top: 0.4rem; 
+  width: 20px;
+}
+
+.footer-main .contact-item span {
+  color: #fff;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.footer-main .contact-item p {
+  color: #B0B3B8;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.newsletter-section {
+  background: rgba(13, 110, 253, 0.1);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-content h4 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-content p {
+  color: #B0B3B8;
+  margin: 0;
+}
+
+.newsletter-form .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 25px 0 0 25px;
+  padding: 0.75rem 1.5rem;
+}
+
+.newsletter-form .form-control::placeholder {
+  color: #B0B3B8;
+}
+
+.newsletter-form .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #0D6EFD;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  color: #fff;
+}
+
+.newsletter-form .btn {
+  border-radius: 0 25px 25px 0;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(45deg, #0D6EFD, #FFC107);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
+}
+
+.footer-bottom {
+  padding: 1.5rem 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  color: #B0B3B8;
+  margin: 0;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+}
+
+.footer-bottom-links a {
+  color: #B0B3B8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: #0D6EFD;
+}
+
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(13, 110, 253, 0.1), rgba(255, 193, 7, 0.1));
+  animation: float 6s ease-in-out infinite;
+}
+
+.element-1 { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+.element-2 { width: 60px; height: 60px; top: 60%; right: 15%; animation-delay: 2s; }
+.element-3 { width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: 4s; }
+.element-4 { width: 40px; height: 40px; top: 40%; right: 30%; animation-delay: 1s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
 /* Responsive */
 @media(max-width:992px) {
   .stats-card h3 { font-size: 1.5rem; }
+  .footer-bottom-links {
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
+
 @media(max-width:768px) {
   .contact-section { padding: 3rem 1rem; }
   .contact-card, .contact-info-card { padding: 2rem; }
   .btn-orange { width: 100%; text-align: center; }
+  
+  .modern-footer { margin-top: 3rem; }
+  .footer-main { padding: 3rem 0 1rem; }
+  .newsletter-section { padding: 1.5rem 0; }
+  
+  .newsletter-form .form-control,
+  .newsletter-form .btn {
+    border-radius: 25px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-links { justify-content: center; }
+  .floating-element { display: none; }
 }
+
