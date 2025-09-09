@@ -290,9 +290,16 @@ export default function Home() {
                   <div><h5>24/7 Support</h5><p className="text-muted">Round-the-clock assistance for clients.</p></div>
                 </div>
               </div>
-              <div className="col-lg-6" data-aos="fade-left">
-                <Image className="img-fluid rounded-4 shadow" src="/image/img1.png" alt="Quora Cargo" />
-              </div>
+              <div className="relative w-full h-[400px]">
+              <Image
+                src="/image/img1.png"
+                alt="Quora Cargo"
+                fill
+                className="object-cover rounded-4 shadow"
+                priority
+              />
+            </div>
+
             </div>
           </div>
         </section>
@@ -386,118 +393,42 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* Pricing */}
-   {/* Pricing */}
-<section className="py-5 bg-white" id="pricing">
-  <div className="container text-center">
-    <h2 className="section-title display-4">Flexible Pricing Plans</h2>
-    <p className="section-subtitle">Choose the plan that fits your cargo needs</p>
-    <div className="row g-4">
-      
-      {/* Basic Fleet Plan */}
-      <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div className="card-clean text-center h-100">
-          <div className="mb-4">
-            <div className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-              style={{ width: '60px', height: '60px', background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})` }}>
-              <i className="fa fa-truck fa-lg text-white"></i>
-            </div>
-            <h4 className="fw-bold mb-3" style={{ color: theme.primary }}>Basic Fleet Plan</h4>
-            <div className="mb-4">
-              <span className="display-4 fw-bold" style={{ color: theme.navy }}>₹3,999</span>
-              <span className="text-muted">/month</span>
-            </div>
-          </div>
-          <ul className="list-unstyled mb-4">
-            <li><i className="fa fa-check me-2 text-success"></i>Up to 100 shipments</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Standard tracking</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Email support</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Economy delivery</li>
-          </ul>
-          <button className="btn btn-outline-orange w-100 ripple">Choose Plan</button>
-        </div>
-      </div>
-
-      {/* Standard Growth Plan */}
-      <div className="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div className="card-clean text-center h-100 position-relative" style={{ border: `3px solid ${theme.primary}` }}>
-          <div className="position-absolute top-0 start-50 translate-middle">
-            <span className="badge-orange">POPULAR</span>
-          </div>
-          <div className="mb-4 mt-3">
-            <div className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-              style={{ width: '60px', height: '60px', background: `linear-gradient(135deg, ${theme.secondary}, ${theme.dark})` }}>
-              <i className="fa fa-rocket fa-lg text-white"></i>
-            </div>
-            <h4 className="fw-bold mb-3" style={{ color: theme.primary }}>Standard Growth Plan</h4>
-            <div className="mb-4">
-              <span className="display-4 fw-bold" style={{ color: theme.navy }}>₹7,999</span>
-              <span className="text-muted">/month</span>
-            </div>
-          </div>
-          <ul className="list-unstyled mb-4">
-            <li><i className="fa fa-check me-2 text-success"></i>Up to 500 shipments</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Advanced tracking dashboard</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Priority support</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Express delivery options</li>
-          </ul>
-          <button className="btn btn-orange w-100 ripple" onClick={createRipple}>Choose Plan</button>
-        </div>
-      </div>
-
-      {/* Enterprise Logistics Plan */}
-      <div className="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div className="card-clean text-center h-100">
-          <div className="mb-4">
-            <div className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-              style={{ width: '60px', height: '60px', background: `linear-gradient(135deg, ${theme.navy}, #475569)` }}>
-              <i className="fa fa-crown fa-lg text-white"></i>
-            </div>
-            <h4 className="fw-bold mb-3" style={{ color: theme.primary }}>Enterprise Logistics Plan</h4>
-            <div className="mb-4">
-              <span className="display-4 fw-bold" style={{ color: theme.navy }}>₹14,999</span>
-              <span className="text-muted">/month</span>
-            </div>
-          </div>
-          <ul className="list-unstyled mb-4">
-            <li><i className="fa fa-check me-2 text-success"></i>Unlimited shipments</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Real-time tracking & API</li>
-            <li><i className="fa fa-check me-2 text-success"></i>24/7 dedicated account manager</li>
-            <li><i className="fa fa-check me-2 text-success"></i>Same-day premium delivery</li>
-          </ul>
-          <button className="btn btn-light-orange w-100 ripple">Choose Plan</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-        <hr className="soft-divider" />
-
+        
         {/* Team */}
-        <section className="py-5" id="team">
-          <div className="container text-center">
-            <h2 className="section-title display-4">Leadership Team</h2>
-            <p className="section-subtitle">Meet the professionals driving Quora Cargo</p>
-            <div className="row g-4">
-              {[
-                { img: 'img/team-1.jpg', name: 'Priyeshbhai Chudasama', role: 'Founder' },
-                { img: 'img/team-2.jpg', name: 'Sudhansu Kumar Sahoo', role: 'Co-Founder / Director' },
-                { img: 'img/team-3.jpg', name: 'Abhijeet Singh', role: 'Chief Business Officer' }
-              ].map((member, idx) => (
-                <div key={idx} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={idx * 100}>
-                  <div className="service-card text-center">
-                    <Image className="img-fluid rounded-circle mb-3" src={member.img} alt={member.name} style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
-                    <h5 className="fw-bold">{member.name}</h5>
-                    <p className="text-muted">{member.role}</p>
+          <section className="py-5" id="team">
+            <div className="container text-center">
+              <h2 className="section-title display-4">Leadership Team</h2>
+              <p className="section-subtitle">Meet the professionals driving Quora Cargo</p>
+              <div className="row g-4">
+                {[
+                  { img: '/image/team-1.jpg', name: 'Priyeshbhai Chudasama', role: 'Founder' },
+                  { img: '/image/team-2.jpg', name: 'Sudhansu Kumar Sahoo', role: 'Co-Founder / Director' },
+                  { img: '/image/team-3.jpg', name: 'Abhijeet Singh', role: 'Chief Business Officer' }
+                ].map((member, idx) => (
+                  <div key={idx} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={idx * 100}>
+                    <div className="service-card text-center">
+                      <div
+                        className="mx-auto rounded-circle overflow-hidden mb-3"
+                        style={{ width: 120, height: 120 }}
+                      >
+                        <Image
+                          src={member.img} // Use public path directly
+                          alt={member.name}
+                          width={120}
+                          height={120}
+                          className="object-cover"
+                        />
+                      </div>
+                      <h5 className="fw-bold">{member.name}</h5>
+                      <p className="text-muted">{member.role}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+
 
         <hr className="soft-divider" />
 
