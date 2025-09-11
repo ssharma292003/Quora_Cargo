@@ -99,7 +99,7 @@ export default function Home() {
           <div className="position-relative mb-5" style={{ height: '600px', overflow: 'hidden' }}>
             <Image 
               className="img-fluid w-100 h-100" 
-              src="/image/carousel-1.jpg" 
+              src="/image/bg.jpeg" 
               alt="Logistics Solution" 
               width={1200} 
               height={600}
