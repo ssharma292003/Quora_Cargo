@@ -359,7 +359,7 @@ export default function Home() {
               <div className="col-lg-4" data-aos="fade-up">
                 <div className="feature-card">
                   <i className="fa fa-truck fa-3x mb-3" style={{ color: theme.primary }}></i>
-                  <h5 className="fw-bold">100+ Fleet Strength</h5>
+                  <h5 className="fw-bold">250+ Fleet Strength</h5>
                   <p className="text-muted">Reliable transport capacity with our own fleet of vehicles.</p>
                 </div>
               </div>
